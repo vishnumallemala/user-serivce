@@ -1,0 +1,207 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "User Management API",
+    "version": "1.0.0",
+    "description": "API for user registration, authentication, and profile management"
+  },
+  "basePath": "/",
+  "schemes": ["http", "https"],
+  "paths": {
+    "/register": {
+      "post": {
+        "summary": "Register a new account",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User object containing registration details",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful registration",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "Log in",
+        "parameters": [
+          {
+            "name": "credentials",
+            "in": "body",
+            "description": "User credentials for login",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful login",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/auth/google": {
+      "get": {
+        "summary": "Initiate Google OAuth Authentication",
+        "description": "This endpoint initiates the Google OAuth authentication process.",
+        "responses": {
+          "200": {
+            "description": "Redirects to Google Sign-in page"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/profile": {
+      "get": {
+        "summary": "Get user profile details",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token for authentication",
+            "required": true,
+            "type": "string",
+            "format": "Bearer YOUR_ACCESS_TOKEN"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update user profile details",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token for authentication",
+            "required": true,
+            "type": "string",
+            "format": "Bearer YOUR_ACCESS_TOKEN"
+          },
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User object containing updated profile details",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful update",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/profile/allProfiles": {
+      "get": {
+        "summary": "Get all public profile details",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Access token for authentication",
+            "required": true,
+            "type": "string",
+            "format": "Bearer YOUR_ACCESS_TOKEN"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OAuthProvider": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": ["Google", "Facebook", "Twitter", "GitHub"]
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "bio": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "photo": {
+          "type": "string"
+        },
+        "isPublic": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "user-serivce",
+  "version": "1.0.0",
+  "description": "Manages user data and their roles",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vishnumallemala/user-serivce.git"
+  },
+  "author": "Srivishnu Mallemala",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vishnumallemala/user-serivce/issues"
+  },
+  "homepage": "https://github.com/vishnumallemala/user-serivce#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.3.4",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "swagger-ui-express": "^4.6.0"
+  }
+}
